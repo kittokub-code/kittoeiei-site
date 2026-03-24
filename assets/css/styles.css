@@ -1,0 +1,241 @@
+/* Reset default styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden; 
+  background-color: black;
+}
+
+.custom-cursor {
+  cursor: url('./assets/cursor/pointer.png'), auto !important;
+}
+
+/* Terminal Styles */
+#terminal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: 90vw;
+  height: 400px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-radius: 10px;
+  z-index: 1000;
+  border: 2px solid #4d4d4d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* --- เพิ่ม Class นี้เพื่อให้ JS สั่งซ่อนแบบไม่ตีกับ !important เดิม --- */
+.hide-system {
+  display: none !important;
+}
+
+@media screen and (max-width: 600px) {
+  #terminal {
+      width: 90%;
+  }
+}
+
+#terminal-header {
+  background-color: #2d2d2d;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  transition: background-color 0.3s;
+}
+
+#terminal-header:hover { background-color: #333333; }
+#terminal-buttons { display: flex; gap: 10px; }
+
+.terminal-button {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.terminal-button:hover { background-color: rgba(255, 255, 255, 0.2); }
+#close-button { background-color: #FF5F57; }
+#minimize-button { background-color: #FFBD2E; }
+#maximize-button { background-color: #28CA42; }
+
+#terminal-content {
+  padding: 20px;
+  height: calc(100% - 40px);
+  overflow-y: auto;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#terminal-text {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre;
+  text-align: left;
+  display: inline-block;
+}
+
+/* Background */
+#video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+#video-background::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 2px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+#myVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#blurred-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  min-height: 300px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+#blurred-box:hover { background-color: rgba(255, 255, 255, 0.1); }
+#blurred-box img#profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 2px solid white;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+iconify-icon {
+  display: inline-block;
+  width: 1em !important;
+  height: 1em !important;
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  vertical-align: middle;
+}
+
+.social-link:hover iconify-icon {
+  font-size: 70px !important;
+  color: #ffffff !important;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+}
+
+.social-link {
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover { transform: translateY(-5px); }
+
+.user-description { margin: 15px 0; }
+.user-description p {
+  margin: 0;
+  padding: 8px 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-size: 14px;
+  color: white;
+}
+
+#avatar-frame {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  z-index: 1000;
+  pointer-events: none;
+  display: block;
+}
+
+/* --- Mobile Support --- */
+@media screen and (max-width: 768px) {
+  #terminal {
+    width: 90% !important;
+    height: 300px !important;
+    /* คงตำแหน่ง 50% ไว้เพื่อให้กึ่งกลางหน้าจอเสมอ */
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  #blurred-box {
+    width: 85% !important;
+    min-height: auto !important;
+    padding: 20px !important;
+    top: 50% !important; /* จัดไว้ที่ 50% เหมือนกัน เพราะอันแรกจะหายไปเอง */
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  #blurred-box img#profile-picture {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  #avatar-frame {
+    width: 100px !important;
+    height: 100px !important;
+    top: 20px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #terminal {
+    display: flex !important; /* แก้จาก none เป็น flex เพื่อให้มันโชว์ขึ้นมาพิมพ์ก่อนหาย */
+  }
+}
+
+.terminal-hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
