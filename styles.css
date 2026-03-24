@@ -1,0 +1,124 @@
+document.addEventListener('DOMContentLoaded', function() {
+  var terminalContainer = document.getElementById('terminal');
+  var terminalText = document.getElementById('terminal-text');
+  var videoBackground = document.getElementById('myVideo');
+  var audioBackground = document.getElementById('myAudio');
+  var blurredBox = document.getElementById('blurred-box');
+  var closeButton = document.getElementById('close-button');
+    
+  if (blurredBox) blurredBox.style.display = 'none';
+  if (videoBackground) {
+      videoBackground.style.filter = 'blur(15px) brightness(0.5)'; 
+      videoBackground.pause();
+  }
+  if (audioBackground) audioBackground.pause();
+
+  var terminalTextContent = [
+      "User: unknown",
+      "IP: Loading...",
+      "System: Loading...", 
+      "Bio Loaded",
+      "Press Enter To Continue",
+  ];
+  var currentIndex = 0;
+
+  function getAsciiArt() {
+    return `
+  ███████╗ ██╗ ███████╗ ██╗
+  ██╔════╝ ██║ ██╔════╝ ██║
+  █████╗   ██║ █████╗   ██║
+  ██╔══╝   ██║ ██╔══╝   ██║
+  ███████╗ ██║ ███████╗ ██║
+  ╚══════╝ ╚═╝ ╚══════╝ ╚═╝
+    `;
+  }
+
+  function typeWriter() {
+      var line = currentIndex === 0 ? getAsciiArt() : terminalTextContent[currentIndex - 1];
+      var i = 0;
+
+      function typeChar() {
+          if (i < line.length) {
+              terminalText.textContent += line.charAt(i);
+              i++;
+              setTimeout(typeChar, 30);
+          } else {
+              terminalText.textContent += "\n";
+              currentIndex++;
+              if (currentIndex < terminalTextContent.length + 1) {
+                  setTimeout(typeWriter, 200);
+              } else {
+                  // --- ส่วน Auto-hide ---
+                  setTimeout(function() {
+                    handleInput();
+                  }, 1500);
+
+                  addEventListeners();
+              }
+          }
+      }
+      typeChar();
+  }
+
+  // ฟังก์ชันสั่งซ่อน (ตัวเอกของงานนี้)
+  function handleInput() {
+      if (terminalContainer) {
+          // ใช้ classList.add เพื่อไปสู้กับ !important ใน CSS
+          terminalContainer.classList.add('terminal-hidden'); 
+      }
+      
+      if (videoBackground) {
+          videoBackground.style.filter = 'none';
+          videoBackground.play();
+      }
+      if (audioBackground) audioBackground.play();
+      if (blurredBox) {
+          blurredBox.style.display = 'flex';
+      }
+      removeEventListeners();
+  }
+
+  // แก้ไขระบบ Listener ให้รองรับมือถือแบบ 100%
+  function addEventListeners() {
+      document.addEventListener('keydown', handleKeyPress);
+      terminalContainer.addEventListener('click', handleInput);
+      // แก้ไข: ใช้ชื่อฟังก์ชันโดยตรงเพื่อให้ remove ออกได้จริง
+      terminalContainer.addEventListener('touchstart', handleInput, {passive: true});
+  }
+
+  function removeEventListeners() {
+      document.removeEventListener('keydown', handleKeyPress);
+      terminalContainer.removeEventListener('click', handleInput);
+      terminalContainer.removeEventListener('touchstart', handleInput);
+  }
+
+  function handleKeyPress(event) {
+      if (event.key === 'Enter') handleInput();
+  }
+
+  if (closeButton) {
+      closeButton.addEventListener('click', handleInput);
+  }
+
+  // Fetch IP & Start
+  fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+          terminalTextContent[1] = "IP: " + data.ip;
+          startTerminal();
+      })
+      .catch(() => {
+          terminalTextContent[1] = "IP: 127.0.0.1 (Offline)";
+          startTerminal();
+      });
+
+  function startTerminal() {
+      terminalText.textContent = ""; 
+      typeWriter();
+  }
+
+  // System OS Information
+  terminalTextContent[2] = "System: " + (navigator.userAgent.match(/Android|iPhone|iPad/i) ? "Mobile System" : "Desktop System");
+
+  if (audioBackground) audioBackground.volume = 0.1;
+});
