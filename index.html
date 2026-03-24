@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
     
-    <link rel="stylesheet" type="text/css" href="styles.css?v=<?php echo filemtime('styles.css'); ?>"> 
-    <link rel="stylesheet" href="style.css?v=<?php echo filemtime('style.css'); ?>">
+    <!-- 🔥 ลบ PHP อย่างเดียว -->
+    <link rel="stylesheet" href="./assets/css/styles.css?v=1"> 
+    <link rel="stylesheet" href="./assets/css/style.css?v=1">
     
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
@@ -38,7 +39,8 @@
         </video>
         
         <div id="audio-background">
-            <audio autoplay loop id="myAudio">
+            <!-- 🔥 เอา autoplay ออก -->
+            <audio loop id="myAudio">
                 <source src="./assets/music/default.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
@@ -57,7 +59,6 @@
                  ˚ ༘ 🦢 🩰 🕊️ ｡˚
               </p>
     
-              <!-- Footer Section -->
               <p style="margin-top: 25px; font-size: 0.9em; opacity: 0.8; letter-spacing: 1px;">
               click for more sweets 🥨 ↓
               </p>
@@ -83,13 +84,22 @@
                 <a href="https://open.spotify.com/user/31jshqaorkilke6mhhbq356pyyem?si=f014bec56d99478d" target="_blank" class="social-link spotify">
                     <iconify-icon icon="mdi:spotify"></iconify-icon>
                 </a>
-    
             </div>
         </div>
     </div>
 
-    <script src="./assets/js/script.js?v=<?php echo time(); ?>"></script>
-    <script src="./assets/js/title.js?v=<?php echo time(); ?>"></script>
-    <script src="./assets/js/discord.js?v=<?php echo time(); ?>"></script>
+    <!-- 🔥 JS path เดิม -->
+    <script src="./assets/js/script.js?v=1"></script>
+    <script src="./assets/js/title.js?v=1"></script>
+    <script src="./assets/js/discord.js?v=1"></script>
+
+    <!-- 🔥 FIX autoplay -->
+    <script>
+        document.addEventListener("click", () => {
+            const audio = document.getElementById("myAudio");
+            if (audio) audio.play().catch(()=>{});
+        }, { once: true });
+    </script>
+
 </body>
 </html>
