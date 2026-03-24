@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitto | Profile</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="icon" type="image/x-icon" href="./assets/favico/default.ico">
+    
+    <link rel="stylesheet" type="text/css" href="styles.css?v=<?php echo filemtime('styles.css'); ?>"> 
+    <link rel="stylesheet" href="style.css?v=<?php echo filemtime('style.css'); ?>">
+    
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body class="custom-cursor">
+
+    <div id="terminal" class="custom-cursor">
+        <div id="terminal-header">
+            <div id="terminal-buttons">
+                <div class="terminal-button" id="close-button"></div>
+                <div class="terminal-button" id="minimize-button"></div>
+                <div class="terminal-button" id="maximize-button"></div>
+            </div>
+        </div>
+        <div id="terminal-content">
+            <p id="terminal-text"></p>
+        </div>
+    </div>
+
+    <div id="video-background">
+        <video autoplay muted loop playsinline id="myVideo">
+          <source src="https://raw.githubusercontent.com/kittokub-code/website/main/download.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+        
+        <div id="audio-background">
+            <audio autoplay loop id="myAudio">
+                <source src="./assets/music/default.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div id="blurred-box">
+            <img id="profile-picture" src="./assets/pfp/default.jpg" alt="Profile Picture">
+            <img id="avatar-frame" src="" alt="Avatar Frame">
+            <p id="username" style="color: white; font-weight: bold; font-size: large;">ᰔ KITTO ᰔ</p>
+            
+            <div class="user-description" style="text-align: center; color: white;">
+              <p id="user-description" style="line-height: 1.8;">
+                 ☁️ ⊹ ｡ ˚ ೀ ˖｡ ˚ ༘ 🫧<br>
+                 soft living & slow mornings ☕️<br>
+                 capturing the beauty in everyday things<br>
+                 ˚ ༘ 🦢 🩰 🕊️ ｡˚
+              </p>
+    
+              <!-- Footer Section -->
+              <p style="margin-top: 25px; font-size: 0.9em; opacity: 0.8; letter-spacing: 1px;">
+              click for more sweets 🥨 ↓
+              </p>
+            </div>
+
+            <div class="links">
+                <a href="https://dcserver.link/-1420307481782911151" target="_blank" class="social-link discord">
+                    <iconify-icon icon="ic:baseline-discord"></iconify-icon>
+                </a> 
+
+                <a href="https://www.roblox.com/share/g/598174646" target="_blank" class="social-link roblox">
+                    <iconify-icon icon="simple-icons:roblox"></iconify-icon>
+                </a>
+
+                <a href="https://www.tiktok.com/@msr_clan_1" target="_blank" class="social-link tiktok">
+                    <iconify-icon icon="ic:baseline-tiktok"></iconify-icon>
+                </a>
+                
+                <a href="https://www.instagram.com/midnight_smiles_rise/" target="_blank" class="social-link instagram">
+                    <iconify-icon icon="mdi:instagram"></iconify-icon>
+                </a>
+              
+                <a href="https://open.spotify.com/user/31jshqaorkilke6mhhbq356pyyem?si=f014bec56d99478d" target="_blank" class="social-link spotify">
+                    <iconify-icon icon="mdi:spotify"></iconify-icon>
+                </a>
+    
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/script.js?v=<?php echo time(); ?>"></script>
+    <script src="./assets/js/title.js?v=<?php echo time(); ?>"></script>
+    <script src="./assets/js/discord.js?v=<?php echo time(); ?>"></script>
+</body>
+</html>
